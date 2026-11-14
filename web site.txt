@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDN JOHO 1 - Sekolah Dasar Negeri Joho 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --biru: #1e5a9c;
+            --kuning: #f9c80e;
+            --putih: #ffffff;
+            --abu: #f4f4f4;
+            --teks: #333333;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--teks);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--biru) 0%, #2a70c0 100%);
+            color: var(--putih);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-sekolah {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-bulat {
+            width: 50px;
+            height: 50px;
+            background: var(--kuning);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--biru);
+        }
+
+        .nama-sekolah h1 {
+            font-size: 1.2rem;
+        }
+
+        .nama-sekolah p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--putih);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--kuning);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(30, 90, 156, 0.85), rgba(30, 90, 156, 0.85)), url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200') center/cover;
+            color: white;
+            text-align: center;
+            padding: 5rem 5%;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--kuning);
+            color: var(--biru);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        section {
+            padding: 3rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--biru);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--kuning);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        .tentang-konten {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .visi-misi {
+            background: var(--abu);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .visi-misi h3 {
+            color: var(--biru);
+            margin-bottom: 0.8rem;
+        }
+
+        .visi-misi ul {
+            list-style-position: inside;
+            line-height: 1.8;
+        }
+
+        .guru-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .kartu-guru {
+            text-align: center;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .kartu-guru:hover {
+            transform: translateY(-5px);
+        }
+
+        .foto-guru {
+            width: 100px;
+            height: 100px;
+            background: var(--abu);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--biru);
+        }
+
+        .galeri-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .galeri-item {
+            height: 180px;
+            background: var(--abu);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--biru);
+            font-size: 1rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .kontak-info {
+            background: var(--abu);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .kontak-info p {
+            margin-bottom: 0.8rem;
+        }
+
+        footer {
+            background: var(--biru);
+            color: white;
+            text-align: center;
+            padding: 2rem 5%;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--biru);
+                flex-direction: column;
+                padding: 1rem;
+                display: none;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .tentang-konten {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="logo-sekolah">
+                <div class="logo-bulat">S</div>
+                <div class="nama-sekolah">
+                    <h1>SDN JOHO 1</h1>
+                    <p>Jauh, Kediri, Jawa Timur</p>
+                </div>
+            </div>
+            <div class="menu-toggle" id="menuToggle">☰</div>
+        </div>
+        <nav id="navMenu">
+            <ul>
+                <li><a href="#beranda">Beranda</a></li>
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#guru">Tenaga Pendidik</a></li>
+                <li><a href="#galeri">Galeri</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Beranda / Hero -->
+    <section class="hero" id="beranda">
+        <h2>Selamat Datang di SDN JOHO 1</h2>
+        <p>Berakhlak Mulia, Cerdas, dan Terampil — Mencetak Generasi Unggul dari Kediri untuk Indonesia</p>
+        <a href="#tentang" class="btn">Kenali Kami Lebih Lanjut</a>
+    </section>
+
+    <!-- Tentang Sekolah -->
+    <section id="tentang">
+        <h2 class="section-title">Tentang SDN JOHO 1</h2>
+        <div class="tentang-konten">
+            <div>
+                <p><strong>SDN Joho 1</strong> adalah Sekolah Dasar Negeri yang berlokasi di Desa Joho, Kecamatan Jauh, Kabupaten Kediri, Jawa Timur. Kami berkomitmen memberikan pendidikan yang berkualitas, merata, dan terjangkau bagi seluruh putra-putri di lingkungan sekitar.</p>
+                <br>
+                <p>Sekolah kami memiliki lingkungan yang asri, aman, dan kondusif untuk kegiatan belajar mengajar. Didukung oleh tenaga pendidik yang profesional dan berdedikasi tinggi.</p>
+            </div>
+            <div>
+                <div class="visi-misi">
+                    <h3>🎯 Visi</h3>
+                    <p>Terwujudnya peserta didik yang beriman, bertakwa, berakhlak mulia, cerdas, terampil, dan cinta tanah air.</p>
+                </div>
+                <div class="visi-misi">
+                    <h3>📌 Misi</h3>
+                    <ul>
+                        <li>Menanamkan nilai agama dan moral sejak dini</li>
+                        <li>Meningkatkan kualitas pembelajaran yang aktif dan kreatif</li>
+                        <li>Mengembangkan bakat dan minat peserta didik</li>
+                        <li>Membangun kerjasama yang baik dengan masyarakat dan orang tua</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tenaga Pendidik -->
+    <section id="guru" style="background: var(--abu);">
+        <h2 class="section-title">Tenaga Pendidik</h2>
+        <div class="guru-grid">
+            <div class="kartu-guru">
+                <div class="foto-guru">👨‍🏫</div>
+                <h4>Budi Santoso, S.Pd.</h4>
+                <p>Kepala Sekolah</p>
+            </div>
+            <div class="kartu-guru">
+                <div class="foto-guru">👩‍🏫</div>
+                <h4>Siti Aminah, S.Pd.</h4>
+                <p>Guru Kelas 1 & 2</p>
+            </div>
+            <div class="kartu-guru">
+                <div class="foto-guru">👨‍🏫</div>
+                <h4>Ahmad Zain, S.Pd.</h4>
+                <p>Guru Kelas 3 & 4</p>
+            </div>
+            <div class="kartu-guru">
+                <div class="foto-guru">👩‍🏫</div>
+                <h4>Rina Kartika, S.Pd.</h4>
+                <p>Guru Kelas 5 & 6</p>
+            </div>
+            <div class="kartu-guru">
+                <div class="foto-guru">👨‍🏫</div>
+                <h4>Dedi Hermawan, S.Pd.</h4>
+                <p>Guru PJOK & Seni</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri Kegiatan -->
+    <section id="galeri">
+        <h2 class="section-title">Galeri Kegiatan</h2>
+        <div class="galeri-grid">
+            <div class="galeri-item">📚<br>Kegiatan Belajar Mengajar</div>
+            <div class="galeri-item">🇮🇩<br>Upacara Bendera Senin</div>
+            <div class="galeri-item">🏆<br>Pemberian Penghargaan</div>
+            <div class="galeri-item">⚽<br>Olahraga & Kesenian</div>
+            <div class="galeri-item">🌳<br>Kebersihan Lingkungan Sekolah</div>
+            <div class="galeri-item">🎓<br>Pelepasan Siswa Kelas 6</div>
+        </div>
+    </section>
+
+    <!-- Kontak -->
+    <section id="kontak" style="background: var(--abu);">
+        <h2 class="section-title">Hubungi Kami</h2>
+        <div class="kontak-info">
+            <p><strong>🏫 Alamat:</strong> Desa Joho, Kecamatan Jauh, Kabupaten Kediri, Jawa Timur — Kode Pos: 64254</p>
+            <p><strong>📞 Telepon:</strong> (0354) xxxxxx</p>
+            <p><strong>📧 Email:</strong> sdnjoho1@gmail.com</p>
+            <p><strong>⏰ Jam Operasional:</strong> Senin - Jumat: 07.00 - 13.00 WIB</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 SDN JOHO 1. Semua Hak Dilindungi.</p>
+        <p>Desa Joho, Kecamatan Jauh, Kabupaten Kediri, Jawa Timur</p>
+    </footer>
+
+    <!-- Script Menu HP -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu').querySelector('ul');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Tutup menu saat diklik
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
